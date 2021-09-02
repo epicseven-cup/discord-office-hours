@@ -3,9 +3,9 @@ import random
 import discord
 import sys
 
-__version__ = "0.2.7"
+__version__ = "0.2.8"
 
-piazza_schedule_link = "<https://piazza.com/class/kk305idk4vd72?cid=6>"
+piazza_schedule_link = "<https://piazza.com/class/kszba47ze8v47t?cid=8>"
 
 lastQueue = ""  # Keep track of the last output from queue to prevent students spamming !S when it hasn't updated
 
