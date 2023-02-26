@@ -12,8 +12,12 @@ lastQueue = ""  # Keep track of the last output from queue to prevent students s
 def isTA(usr: discord.Member):
     roles = usr.roles
     for x in roles:
-        if x.name.upper() == "CSE 116 TA":
-            return True
+
+        # Checking if user have permission the permission to kick user
+        return x.permissions.kick_members
+        # Deprecated because be have to many different ta role names
+        #if x.name.upper() == "CSE 116 TA":
+            #return True
     return False
 
 
