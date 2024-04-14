@@ -2,7 +2,6 @@
 import random
 import discord
 import sys
-
 __version__ = "0.2.8"
 
 piazza_schedule_link = "<https://piazza.com/class/kszba47ze8v47t?cid=8>"
@@ -10,14 +9,13 @@ piazza_schedule_link = "<https://piazza.com/class/kszba47ze8v47t?cid=8>"
 lastQueue = ""  # Keep track of the last output from queue to prevent students spamming !S when it hasn't updated
 
 def isTA(usr: discord.Member):
-    roles = usr.roles
-    for x in roles:
+    roles:list[discord.Role] = usr.roles
 
-        # Checking if user have permission the permission to kick user
-        return x.permissions.kick_members
-        # Deprecated because be have to many different ta role names
-        #if x.name.upper() == "CSE 116 TA":
-            #return True
+    # Exception
+    special_roles = {"ex-ta"}
+    for x in roles:
+        if x.permissions. kick_members or x.name.lower() in special_roles:
+            return True
     return False
 
 
@@ -239,29 +237,14 @@ async def on_message(message):
                 ver=__version__)
             await message.channel.send(msg)
 
-    # else:  # Not in office hours channel
-        # Allow these in any channel now
-    if isTA(message.author):  # Other fun stuff for only TAs because we don't want to spam the server
+    # Allow these in any channel now
+
+    # Only for TAs or Ex-TA
+    if isTA(message.author):
         msgLower = message.content.lower()
         if message.content.lower().startswith('!panik'):
                 await message.channel.send(
                     "https://media.discordapp.net/attachments/542843013559353344/692393206205251744/PANIK.gif")
-
-        # if message.content.lower().startswith("!pet"):
-        #     possibilities = ["Purr", "Purrrrr", "Meow", "😹"]
-        #     await message.channel.send(random.choice(possibilities))
-        #
-        # if "bad" in message.content.lower() and "gandalf" in message.content.lower():
-        #     await message.channel.send("Hisssss")
-        #
-        # # From Rin:
-        # if "good" in message.content.lower() and "gandalf" in message.content.lower():
-        #     possibilities = ["Purr", "Purrrrr", "Meow"]
-        #     await message.channel.send(random.choice(possibilities))
-        #
-        # if "good" in message.content.lower() and "bot" in message.content.lower():
-        #     possibilities = ["Purr", "Purrrrr", "Meow"]
-        #     await message.channel.send(random.choice(possibilities))
 
         # A better way by Nicholas:
         negativeWords = ["bad", "not good", "terrible", "awful", "no good", "wrong", "incorrect", "not correct"]
