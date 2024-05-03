@@ -14,7 +14,7 @@ def isTA(usr: discord.Member):
     # Exception
     special_roles = {"ex-ta"}
     for x in roles:
-        if x.permissions. kick_members or x.name.lower() in special_roles:
+        if x.permissions.kick_members or x.name.lower() in special_roles:
             return True
     return False
 
